@@ -10,7 +10,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Ativar CORS
-app.use(cors());
+// Ou você pode configurar para permitir apenas certos domínios
+app.use(
+  cors({
+    origin: ["https://recipeshareweb.vercel.app", "http://localhost:550"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(morgan("dev"));
 
