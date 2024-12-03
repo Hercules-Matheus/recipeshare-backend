@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 app.use(
   cors({
     origin: ["https://recipeshareweb.vercel.app", "http://localhost:5500"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
