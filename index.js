@@ -43,7 +43,7 @@ app.use((req, res, next) => {
     "default-src 'self'; " +
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
       "style-src 'self' 'unsafe-inline'; " +
-      "font-src 'self';"
+      "font-src 'self' https://fonts.gstatic.com;"
   );
   next();
 });
