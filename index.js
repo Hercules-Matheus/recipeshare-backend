@@ -15,6 +15,7 @@ app.use(
     origin: ["https://recipeshareweb.vercel.app", "http://localhost:5500"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
@@ -45,9 +46,6 @@ async function authenticateJWT(req, res, next) {
     res.status(401).send({ error: "Token inválido ou expirado" });
   }
 }
-
-// Rota OPTIONS para CORS
-app.options("*", cors());
 
 // Rota para consultas de receitas do usuario atual em conjunto
 app.get("/recipes", authenticateJWT, async (req, res) => {
