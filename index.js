@@ -31,16 +31,16 @@ app.use(cors());
 //   })
 // );
 
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["*"],
-      fontSrc: ["*"],
-      styleSrc: ["*"],
-      scriptSrc: ["*"],
-    },
-  })
-);
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["*"],
+//       fontSrc: ["*"],
+//       styleSrc: ["*"],
+//       scriptSrc: ["*"],
+//     },
+//   })
+// );
 
 //Middleware
 app.use(bodyParser.json());
