@@ -13,7 +13,10 @@ const PORT = process.env.PORT || 3000;
 // Ou você pode configurar para permitir apenas certos domínios
 app.use(
   cors({
-    origin: ["https://recipeshareweb.vercel.app", "http://localhost:5500"],
+    origin: [
+      "https://recipeshareweb.vercel.app",
+      "http://localhost:5500/recipeshare-frontend",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
