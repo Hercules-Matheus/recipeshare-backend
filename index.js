@@ -22,8 +22,11 @@ app.use(
         "'self'",
         "https://recipeshare-backend-5868bfd6cbe6.herokuapp.com",
       ], // permitir conexões com o backend
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://www.gstatic.com"], // script do Google Fonts
-      styleSrc: ["'self'", "https://fonts.googleapis.com"], // permitir o carregamento de fontes do Google Fonts
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://www.gstatic.com"], // permitir scripts do Google
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"], // permitir estilos do Google Fonts
+      imgSrc: ["'self'", "data:"], // permitir imagens do próprio domínio e dados
+      objectSrc: ["'none'"], // desativar carregamento de objetos
+      frameSrc: ["'none'"], // desativar carregamento de frames
     },
   })
 );
@@ -52,18 +55,6 @@ async function authenticateJWT(req, res, next) {
     res.status(401).send({ error: "Token inválido ou expirado" });
   }
 }
-
-// Middleware de Content Security Policy (CSP)
-app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
-      "style-src 'self' 'unsafe-inline'; " +
-      "font-src 'self' https://fonts.gstatic.com;"
-  );
-  next();
-});
 
 // Rota para consultas de receitas do usuario atual em conjunto
 app.get("/recipes", authenticateJWT, async (req, res) => {
