@@ -10,13 +10,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Ativar CORS
-// Ou você pode configurar para permitir apenas certos domínios
 app.use(
   cors({
-    origin: [
-      "https://recipeshareweb.vercel.app",
-      "http://localhost:5500/recipeshare-frontend",
-    ],
+    origin: ["https://recipeshareweb.vercel.app", "http://localhost:5500"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -48,6 +44,9 @@ async function authenticateJWT(req, res, next) {
     res.status(401).send({ error: "Token inválido ou expirado" });
   }
 }
+
+// Rota OPTIONS para CORS
+app.options("*", cors());
 
 // Rota para consultas de receitas do usuario atual em conjunto
 app.get("/recipes", authenticateJWT, async (req, res) => {
