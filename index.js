@@ -40,6 +40,7 @@ async function authenticateJWT(req, res, next) {
 
     next();
   } catch (error) {
+    console.log(error);
     console.error("Erro ao validar token:", error.message);
     res.status(401).send({ error: "Token inválido ou expirado" });
   }
@@ -73,6 +74,7 @@ app.get("/recipes", authenticateJWT, async (req, res) => {
 
     res.send(recipes);
   } catch (error) {
+    console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
@@ -98,6 +100,7 @@ app.get("/recipes/all", authenticateJWT, async (req, res) => {
 
     res.send(recipes);
   } catch (error) {
+    console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
@@ -121,6 +124,7 @@ app.get("/recipes/:id", authenticateJWT, async (req, res) => {
     // Responde com a receita e o username
     res.status(200).send({ id: recipeDoc.id, ...recipeData, username });
   } catch (error) {
+    console.log(error);
     res.status(500).send({ error: error.message });
   }
 });
@@ -135,6 +139,7 @@ app.post("/recipes", authenticateJWT, async (req, res) => {
     const docRef = await db.collection("recipes").add(recipe);
     res.status(201).send({ id: docRef.id, ...recipe });
   } catch (error) {
+    console.log(error);
     res
       .status(400)
       .send({ error: "rota de addRecipes", details: error.message });
@@ -148,6 +153,7 @@ app.put("/recipes/:id", authenticateJWT, async (req, res) => {
     await db.collection("recipes").doc(id).update(req.body);
     res.status(200).send({ id, ...req.body });
   } catch (error) {
+    console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
@@ -168,6 +174,7 @@ app.delete("/recipes/:id", authenticateJWT, async (req, res) => {
     await db.collection("recipes").doc(id).delete();
     res.status(200).send({ message: "Receita deletada com sucesso" });
   } catch (error) {
+    console.log(error);
     console.error("Erro ao deletar receita:", error.message);
     res
       .status(400)
@@ -203,6 +210,7 @@ app.post("/register", authenticateJWT, async (req, res) => {
       userId: req.user.uid,
     });
   } catch (error) {
+    console.log(error);
     console.error("Erro ao cadastrar usuário:", error.message);
     res
       .status(400)
