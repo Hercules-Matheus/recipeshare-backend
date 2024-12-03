@@ -12,7 +12,11 @@ const PORT = process.env.PORT || 3000;
 // Ativar CORS
 app.use(
   cors({
-    origin: ["https://recipeshareweb.vercel.app", "http://localhost:5500"],
+    origin: [
+      "https://recipeshareweb.vercel.app",
+      "http://localhost:5500",
+      "http://127.0.0.1:5500",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
