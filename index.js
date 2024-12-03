@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const helmet = require("helmet");
+const morgan = require("morgan");
 const cors = require("cors");
 const { admin, db } = require("./firebase-config");
 const dotenv = require("dotenv");
@@ -12,35 +12,7 @@ const PORT = process.env.PORT || 3000;
 // Ativar CORS
 app.use(cors());
 
-// Configurar CSP para permitir fontes de sites específicos
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'"], // permitir somente fontes do mesmo domínio
-//       fontSrc: ["'self'", "https://fonts.gstatic.com"], // permitir fontes de Google Fonts
-//       connectSrc: [
-//         "'self'",
-//         "https://recipeshare-backend-5868bfd6cbe6.herokuapp.com",
-//       ], // permitir conexões com o backend
-//       scriptSrc: ["'self'", "'unsafe-inline'", "https://www.gstatic.com"], // permitir scripts do Google
-//       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"], // permitir estilos do Google Fonts
-//       imgSrc: ["'self'", "data:"], // permitir imagens do próprio domínio e dados
-//       objectSrc: ["'none'"], // desativar carregamento de objetos
-//       frameSrc: ["'none'"], // desativar carregamento de frames
-//     },
-//   })
-// );
-
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["*"],
-//       fontSrc: ["*"],
-//       styleSrc: ["*"],
-//       scriptSrc: ["*"],
-//     },
-//   })
-// );
+app.use(morgan("dev"));
 
 //Middleware
 app.use(bodyParser.json());
